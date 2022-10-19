@@ -83,10 +83,52 @@ const deleteUser = (req, res) => {
     });
 };
 
+//Todo => My User Services
+//* Get My User
+const getMyUser = (req, res) => {
+  const myId = req.user.id;
+  usersController.getUserById(myId)
+    .then(data => {
+      res.status(200).json(data);
+    })
+    .catch(err => {
+      res.status(400).json({ message: err.message });
+    });
+};
+
+//? Protected Routes for /me => Update / Delete
+//* Update My user
+const patchMyUser = (req, res) => {
+  const myId = req.user.id;
+  const { firstName, lastName, phone, birthday, gender, country } = req.body;
+  usersController.updateUser(myId, { firstName, lastName, phone, birthday, gender, country })
+    .then(() => {
+      res.status(200).json({ message: 'Your user was updated succesfully' });
+    })
+    .catch(err => {
+      res.status(400).json({ message: err.message });
+    });
+};
+
+//* Delete My User updating his status
+const deleteMyUser = (req, res) => {
+  const myId = req.user.id;
+  usersController.updateUser(myId, { status: 'inactive' })
+    .then(() => {
+      res.status(200).json({ message: 'You user was deleted succesfully' });
+    })
+    .catch(err => {
+      res.status(400).json({ message: err.message });
+    });
+};
+
 module.exports = {
   getUsers,
   getOneUser,
   registerUser,
   patchUser,
-  deleteUser
+  deleteUser,
+  getMyUser,
+  patchMyUser,
+  deleteMyUser
 };

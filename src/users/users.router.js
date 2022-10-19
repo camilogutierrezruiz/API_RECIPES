@@ -10,13 +10,23 @@ require('../middlewares/auth.middleware')(passport);
 
 //Todo => Configure routes
 //* Root Route
-router.get('/', passport.authenticate('jwt', { session: false }), usersServices.getUsers);
+router.route('/')
+  .get(usersServices.getUsers);
 
 //* Route Info logged user
 router.route('/me')
-  .get()
-  .patch()
-  .delete();
+  .get(
+    passport.authenticate('jwt', { session: false }),
+    usersServices.getMyUser
+  )
+  .patch(
+    passport.authenticate('jwt', { session: false }),
+    usersServices.patchMyUser
+  )
+  .delete(
+    passport.authenticate('jwt', { session: false }),
+    usersServices.deleteMyUser
+  );
 
 //* Dynamic Routes by Id /users/:id
 router.route('/:id')

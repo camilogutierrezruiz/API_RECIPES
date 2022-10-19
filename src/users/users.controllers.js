@@ -8,13 +8,13 @@ const Users = require('../models/users.models');
 //Todo => Create all functions controllers for Users model
 //* Get All Users
 const getAllUsers = async () => {
-  const data = await Users.findAll();
+  const data = await Users.findAll({ where: { status: 'active' } });
   return data;
 };
 
 //* Get User by ID
 const getUserById = async (id) => {
-  const data = await Users.findOne({ where: { id } });
+  const data = await Users.findOne({ where: { id, status: 'active' } });
   return data;
 };
 
@@ -48,7 +48,7 @@ const deleteUser = async (id) => {
 
 //* Get User by Email
 const getUserByEmail = async (email) => {
-  const data = await Users.findOne({ where: { email } });
+  const data = await Users.findOne({ where: { email, status: 'active' } });
   return data;
 };
 
