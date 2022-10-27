@@ -4,6 +4,7 @@ const db = require('./utils/database');
 
 //* Files
 const { port } = require('./config');
+const initModels = require('./models/initModels');
 const userRouter = require('./users/users.router');
 const authRouter = require('./auth/auth.router');
 
@@ -31,9 +32,11 @@ db.sync()
     console.log(err);
   });
 
+//* Init Models
+initModels();
+
 //* Define API prefix
-const prefix = '/api/v1/users';
-const authPrefix = '/api/v1/auth';
+const URL_API = '/api/v1';
 
 app.get('/', (req, res) => {
   res.status(200).json({
@@ -42,8 +45,8 @@ app.get('/', (req, res) => {
   });
 });
 
-app.use(prefix, userRouter);
-app.use(authPrefix, authRouter)
+app.use(`${URL_API}/users`, userRouter);
+app.use(`${URL_API}/auth`, authRouter)
 
 
 app.listen(port, () => {

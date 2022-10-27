@@ -1,5 +1,4 @@
 //* Import Controllers from users.controllers
-const { json } = require('sequelize');
 const usersController = require('./users.controllers');
 
 //Todo => Create services 
@@ -19,7 +18,9 @@ const getOneUser = (req, res) => {
   const id = req.params.id;
   usersController.getUserById(id)
     .then(data => {
-      res.status(200).json(data);
+      data
+        ? res.status(200).json(data)
+        : res.status(404).json({ message: 'Invalid ID' });
     })
     .catch(err => {
       res.status(404).json({ message: err.message });
