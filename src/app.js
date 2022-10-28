@@ -24,7 +24,9 @@ db.authenticate()
   });
 
 //todo => Synchronization
-db.sync()
+db.sync({
+  // force: true
+})
   .then(() => {
     console.log('Database synced');
   })
