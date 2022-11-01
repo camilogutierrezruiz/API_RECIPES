@@ -1,5 +1,6 @@
 //* Dependencies
 const express = require('express');
+const cors = require('cors');
 const db = require('./utils/database');
 
 //* Files
@@ -7,11 +8,13 @@ const { port } = require('./config');
 const initModels = require('./models/initModels');
 const userRouter = require('./users/users.router');
 const authRouter = require('./auth/auth.router');
+const categoriesRouter = require('./models_actions/categories/categories.router');
+const recipesRouter = require('./models_actions/recipes/recipes.router');
 
 //* Initial Configs
 const app = express();
-
 app.use(express.json());
+app.use(cors());
 
 //* Database setting
 //todo => Authentication
@@ -40,16 +43,16 @@ initModels();
 //* Define API prefix
 const URL_API = '/api/v1';
 
-app.get('/', (req, res) => {
+app.get(`${URL_API}`, (req, res) => {
   res.status(200).json({
-    message: 'OK!',
-    users: `localhost:${port}/api/v1/users`
+    message: 'RECIPES API OK!'
   });
 });
 
 app.use(`${URL_API}/users`, userRouter);
-app.use(`${URL_API}/auth`, authRouter)
-
+app.use(`${URL_API}/auth`, authRouter);
+app.use(`${URL_API}/categories`, categoriesRouter);
+app.use(`${URL_API}/recipes`, recipesRouter);
 
 app.listen(port, () => {
   console.log(`Server started ar port ${port}`);
