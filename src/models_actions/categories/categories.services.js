@@ -55,7 +55,7 @@ const patchCategory = (req, res) => {
   categoriesController.updateCategory(id, name)
     .then(data => {
       data[0]
-        ? res.status(200).json(`Category ${id} has been updated!`)
+        ? res.status(200).json({ message: `Category ${id} has been updated!` })
         : res.status(404).json({ message: 'Invalid ID' })
     })
     .catch(err => {

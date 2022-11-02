@@ -12,9 +12,7 @@ const getCategoryById = async (id) => {
 };
 
 const createCategory = async (name) => {
-  return await Categories.create({
-    name
-  });
+  return await Categories.create({ name });
 };
 
 const updateCategory = async (id, newName) => {

@@ -9,6 +9,7 @@ const initModels = require('./models/initModels');
 const userRouter = require('./users/users.router');
 const authRouter = require('./auth/auth.router');
 const categoriesRouter = require('./models_actions/categories/categories.router');
+const typesRouter = require('./models_actions/types/types.router');
 const recipesRouter = require('./models_actions/recipes/recipes.router');
 
 //* Initial Configs
@@ -52,6 +53,7 @@ app.get(`${URL_API}`, (req, res) => {
 app.use(`${URL_API}/users`, userRouter);
 app.use(`${URL_API}/auth`, authRouter);
 app.use(`${URL_API}/categories`, categoriesRouter);
+app.use(`${URL_API}/types`, typesRouter);
 app.use(`${URL_API}/recipes`, recipesRouter);
 
 app.listen(port, () => {

@@ -31,9 +31,9 @@ const Ingredients = db.define('ingredients', {
   urlImg: {
     type: DataTypes.STRING,
     field: 'url_img',
-    validate: {
-      isUrl: true
-    }
+    // validate: {
+    //   isUrl: true
+    // }
   }
 }, {
   timestamps: false

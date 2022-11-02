@@ -9,7 +9,7 @@ const Recipes = require('./recipes.models');
 
 // Define Model
 const Instructions = db.define('instructions', {
-  type: {
+  id: {
     type: DataTypes.UUID,
     primaryKey: true,
     allowNull: false
