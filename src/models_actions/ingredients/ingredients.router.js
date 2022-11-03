@@ -1,9 +1,9 @@
 const router = require('express').Router()
 const passport = require('passport')
-const adminMiddleware = require('../middlewares/role.middleware')
+const adminMiddleware = require('../../middlewares/role.middleware')
 
-const ingredientServices = require('./ingredients.services')
-require('../middlewares/auth.middleware')(passport)
+const ingredientsServices = require('./ingredients.services')
+require('../../middlewares/auth.middleware')(passport)
 
 
 
@@ -11,24 +11,30 @@ require('../middlewares/auth.middleware')(passport)
 //? /ingredients/:ingredient_id
 
 router.route('/')
-    .get(ingredientServices.getAllIngredients)
-    .post(
-        passport.authenticate('jwt', {session: false}),
-        adminMiddleware,
-        ingredientServices.postIngredient
-    )
+  .get(ingredientsServices.getAllIngredients)
+  .post(
+    passport.authenticate('jwt', { session: false }),
+    adminMiddleware,
+    ingredientsServices.postIngredient
+  )
 
 router.route('/:ingredient_id')
-    .get(ingredientServices.getIngredientById)
-    .patch(
-        passport.authenticate('jwt', {session: false}),
-        adminMiddleware,
-        ingredientServices.patchIngredient
-    )
-    .delete(
-        passport.authenticate('jwt', {session: false}),
-        adminMiddleware,
-        ingredientServices.deleteIngredient
-    )
+  .get(ingredientsServices.getIngredientById)
+  .patch(
+    passport.authenticate('jwt', { session: false }),
+    adminMiddleware,
+    ingredientsServices.patchIngredient
+  )
+  .delete(
+    passport.authenticate('jwt', { session: false }),
+    adminMiddleware,
+    ingredientsServices.deleteIngredient
+  )
 
+router.post(
+  '/:ingredient_id/add_to_user',
+  passport.authenticate('jwt', { session: false }),
+  adminMiddleware,
+  ingredientsServices.postIngredientToUser
+)
 module.exports = router

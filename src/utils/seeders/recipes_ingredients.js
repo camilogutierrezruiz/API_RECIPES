@@ -1,6 +1,6 @@
 const uuid = require('uuid');
 
-const RecipesIngredients = require('../../models/recipes_ingredients.models');
+const RecipesIngredients = require('../../models/intermediate_tables/recipes_ingredients.models');
 
 
 RecipesIngredients.bulkCreate([

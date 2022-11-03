@@ -16,7 +16,7 @@ const createCategory = async (name) => {
 };
 
 const updateCategory = async (id, newName) => {
-  return await Categories.update(newName, { where: { id } });
+  return await Categories.update({ name: newName }, { where: { id } });
 };
 
 const deleteCategory = async (id) => {
