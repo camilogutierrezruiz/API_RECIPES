@@ -119,17 +119,18 @@ const getMyRecipes = async (userId) => {
       }
     }
   });
-  return userIngredients;
+  return data;
 };
 
-getMyRecipes('1857e885-78ac-48b4-86ab-693b7d85f5bc')
-  .then(data => console.log(data))
-  .catch(err => console.log(err));
+// getMyRecipes('8b9db765-60b4-4c4a-8954-888fcaa37536')
+//   .then(data => console.log(data))
+//   .catch(err => console.log(err));
 
 module.exports = {
   getAllRecipes,
   getRecipeById,
   createRecipe,
   updateRecipe,
-  deleteRecipe
+  deleteRecipe,
+  getMyRecipes
 };
